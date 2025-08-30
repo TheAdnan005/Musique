@@ -7,7 +7,7 @@ import ytdl from "@distube/ytdl-core";
 const app = express();
 app.use(cors());
 
-const API_KEY = "AIzaSyCj_H9ZaVOZViHHMbwrelC5qHjP_nt91m8";
+const API_KEY = "";
 
 // 🔎 Search videos
 app.get("/search", async (req, res) => {
