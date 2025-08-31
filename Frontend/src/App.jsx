@@ -1,6 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import dotenv from "dotenv";
 import { motion } from "framer-motion";
+
+// dotenv.config();
+// Get API base URL from environment variable
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -12,7 +19,7 @@ export default function App() {
     if (!query.trim()) return;
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/search", {
+      const res = await axios.get(`${API_BASE_URL}/search`, {
         params: { q: query },
       });
       setResults(res.data);
@@ -26,10 +33,7 @@ export default function App() {
     if (!match) return "00:00";
     const minutes = parseInt(match[1] || 0, 10);
     const seconds = parseInt(match[2] || 0, 10);
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
-      2,
-      "0"
-    )}`;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
 
   return (
@@ -78,9 +82,7 @@ export default function App() {
                   alt={video.title}
                   className="rounded-lg w-full mb-3"
                 />
-                <h3 className="text-lg font-semibold line-clamp-2">
-                  {video.title}
-                </h3>
+                <h3 className="text-lg font-semibold line-clamp-2">{video.title}</h3>
                 <p className="text-sm text-gray-400 mt-1">
                   ⏱ {formatDuration(video.duration)}
                 </p>
@@ -88,11 +90,11 @@ export default function App() {
                 <audio
                   controls
                   className="w-full mt-3"
-                  src={`http://localhost:5000/stream?videoId=${video.videoId}&format=mp3`}
+                  src={`${API_BASE_URL}/stream?videoId=${video.videoId}&format=mp3`}
                 />
 
                 <a
-                  href={`http://localhost:5000/download?videoId=${video.videoId}&format=mp3`}
+                  href={`${API_BASE_URL}/download?videoId=${video.videoId}&format=mp3`}
                   className="block mt-4 px-4 py-2 text-center bg-green-600 hover:bg-green-700 rounded-lg"
                   download
                 >
@@ -104,17 +106,15 @@ export default function App() {
                 <video
                   controls
                   className="rounded-lg w-full mb-3 max-h-48 object-contain"
-                  src={`http://localhost:5000/stream?videoId=${video.videoId}&format=mp4`}
+                  src={`${API_BASE_URL}/stream?videoId=${video.videoId}&format=mp4`}
                 />
-                <h3 className="text-lg font-semibold line-clamp-2">
-                  {video.title}
-                </h3>
+                <h3 className="text-lg font-semibold line-clamp-2">{video.title}</h3>
                 <p className="text-sm text-gray-400 mt-1">
                   ⏱ {formatDuration(video.duration)}
                 </p>
 
                 <a
-                  href={`http://localhost:5000/download?videoId=${video.videoId}&format=mp4`}
+                  href={`${API_BASE_URL}/download?videoId=${video.videoId}&format=mp4`}
                   className="block mt-4 px-4 py-2 text-center bg-green-600 hover:bg-green-700 rounded-lg"
                   download
                 >
