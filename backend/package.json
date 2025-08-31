@@ -1,13 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "backend/server.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/server.js",
-    "build": "react-scripts build"
-
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
