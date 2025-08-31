@@ -1,13 +1,15 @@
 import express from "express";
 import cors from "cors";
 import axios from "axios";
+import dotenv from "dotenv";
 import he from "he";
 import ytdl from "@distube/ytdl-core";
 
 const app = express();
 app.use(cors());
 
-const API_KEY = "AIzaSyCj_H9ZaVOZViHHMbwrelC5qHjP_nt91m8";
+dotenv.config();
+const API_KEY = process.env.API_KEY;
 
 // 🔎 Search videos
 app.get("/search", async (req, res) => {
